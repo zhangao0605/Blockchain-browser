@@ -1,0 +1,69 @@
+<div class="second_header">
+  <div class="second_header_logo" style="cursor: pointer" (click)="toHome()">
+
+  </div>
+</div>
+<div class="info_all">
+  <div class="block_info">
+    <p class="first_table_title_all">区块</p>
+    <ul>
+      <li class="left"> 块高</li>
+      <li class="right"> {{blockInfo.height}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 区块</li>
+      <li class="right"> {{blockInfo.chainId}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 交易数</li>
+      <li class="right"> {{blockInfo.txcount}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 哈希值</li>
+      <li class="right"> {{blockInfo.hash}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 父块哈希</li>
+      <li class="right"> {{blockInfo.previousHash}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 生成时间</li>
+      <li class="right"> {{blockInfo.theDateString}}</li>
+    </ul>
+  </div>
+</div>
+<div class="first_body">
+  <div class="first_table">
+    <p class="first_table_title">交易</p>
+  </div>
+  <div class="first_table_1">
+    <nz-table #basicTable
+              [nzData]="dataSet"
+              [nzPageSize]="6"
+              [nzFrontPagination]="false"
+              [nzLoading]="loading"
+              [nzTotal]="total"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="searchData()"
+              (nzPageSizeChange)="searchData(true)">
+      <thead>
+      <tr>
+        <th nzWidth="25%" class="tex_center">时间</th>
+        <th nzWidth="25%" class="tex_center">发送人</th>
+        <th nzWidth="25%" class="tex_center">接受人</th>
+        <th nzWidth="25%" class="tex_center">数额</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataSet">
+        <td class="tex_center color_black">{{data.theDateString}}</td>
+        <td class="tex_center color_purple" (click)="gotopersonal(data.from)">{{peoSlice(data.from)}}</td>
+        <td class="tex_center color_purple" (click)="gotopersonal(data.to)">{{peoSlice(data.to)}}</td>
+        <td class="tex_center color_black">{{data.value}}
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

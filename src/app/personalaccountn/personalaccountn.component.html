@@ -1,0 +1,68 @@
+<div class="second_header">
+  <div class="second_header_logo" style="cursor: pointer" (click)="toHome()">
+
+  </div>
+</div>
+<div class="info_all">
+  <div class="block_info">
+    <p class="first_table_title_all">账户</p>
+    <ul>
+      <li class="left"> 地址</li>
+      <li class="right"> {{perInfo.address}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 币数量</li>
+      <li class="right"> {{perInfo.balance}}</li>
+    </ul>
+    <ul>
+      <li class="left"> nonce</li>
+      <li class="right"> {{perInfo.nonce}}</li>
+    </ul>
+    <ul>
+      <li class="left"> 类型</li>
+      <li class="right"> 普通账户</li>
+    </ul>
+  </div>
+</div>
+<div class="first_body">
+  <div class="first_table">
+    <p class="first_table_title">交易</p>
+  </div>
+  <div class="first_table_1">
+    <nz-table #basicTable [nzData]="dataSet"
+              [nzPageSize]="10"
+              [nzFrontPagination]="false"
+              [nzLoading]="loading"
+              [nzTotal]="total"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="searchData()"
+              (nzPageSizeChange)="searchData(true)"
+    >
+      <thead>
+      <tr>
+        <th nzWidth="22%" class="tex_center">时间</th>
+        <th nzWidth="10%" class="tex_center">所在区块</th>
+        <th nzWidth="10%" class="tex_center">所在链</th>
+        <th nzWidth="22%" class="tex_center">源账户</th>
+        <th nzWidth="22%" class="tex_center">目的账户</th>
+        <th nzWidth="7%" class="tex_center">数额</th>
+        <th nzWidth="7%" class="tex_center">状态</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataSet">
+        <td class="tex_center color_black">{{data.theDateString}}</td>
+        <td class="tex_center color_purple" (click)="gotoblockInfo(data.chainId,data.height)">{{data.height}}</td>
+        <td class="tex_center color_purple" (click)="gotosecond(data.chainId)">{{data.chainId}}</td>
+        <td class="tex_center color_purple" (click)="dataReload(data.from)">{{peoSlice(data.from)}}</td>
+        <td class="tex_center color_purple" (click)="dataReload(data.to)">{{peoSlice(data.to)}}</td>
+        <td class="tex_center color_black">{{data.value}}</td>
+        <td class="tex_center color_green">完成
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+

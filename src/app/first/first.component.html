@@ -1,0 +1,205 @@
+<div class="title_all">
+  <div class="title_logo">
+
+  </div>
+  <div class="title_first_line">
+    <div class="title_first_line_title">
+      主链
+    </div>
+    <ul>
+      <li class="left" style="cursor: pointer" (click)="shortcut_menu_open('',2)">committee</li>
+      <li class="right">{{data1_commttee}}</li>
+    </ul>
+    <ul>
+      <li class="left">高度</li>
+      <li class="right">{{data1_height}}</li>
+    </ul>
+  </div>
+  <div class="title_second_line">
+    <div class="title_second_line_1" style="margin-left: 0">
+      <div class="title_second_line_title">
+        账户链
+      </div>
+      <ul>
+        <li class="left" style="cursor: pointer"  (click)="shortcut_menu_open('',3)">committee</li>
+        <li class="right">{{data2_commttee}}</li>
+      </ul>
+    </div>
+    <div class="title_second_line_1 title_second_line_10 ">
+      <div class="title_second_line_title color_hide">
+        账户链
+      </div>
+      <ul>
+        <li class="left color_hide">committee</li>
+        <li class="right color_hide">0</li>
+      </ul>
+    </div>
+    <div class="title_second_line_1 title_second_line_10">
+      <div class="title_second_line_title color_hide">
+        账户链
+      </div>
+      <ul>
+        <li class="left color_hide">committee</li>
+        <li class="right color_hide">0</li>
+      </ul>
+    </div>
+  </div>
+  <div class="title_three_line">
+    <div class="title_three_line_1" style="margin-left: 0">
+      <div class="title_three_line_title">
+        交易分链
+      </div>
+      <div class="title_three_line_tab">
+        <ul>
+          <li class="left">账户总数</li>
+          <li class="right">{{data3.accountCount}}</li>
+        </ul>
+        <ul>
+          <li class="left">成员</li>
+          <li class="right" style="margin-right:-15%">{{data3.memberCount}}</li>
+        </ul>
+        <ul>
+          <li class="left">块高</li>
+          <li class="right">{{data3.currentHeight}}</li>
+        </ul>
+        <ul>
+          <li class="left">分链数</li>
+          <li class="right">{{data3.txChainCount}}</li>
+        </ul>
+        <ul>
+          <li class="left">交易数</li>
+          <li class="right">{{data3.txCount}}</li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="title_three_line_2 bgcolor_hide">
+      <div class="title_three_line_title1">
+        交易分链
+      </div>
+      <div class="title_three_line_tab">
+        <ul>
+          <li class="left color_hide">账户总数</li>
+          <li class="right color_hide">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">成员</li>
+          <li class="right color_hide" style="margin-right:-15%">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">块高</li>
+          <li class="right color_hide">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">分链数</li>
+          <li class="right color_hide">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">交易数</li>
+          <li class="right color_hide">0</li>
+        </ul>
+      </div>
+    </div>
+    <div class="title_three_line_2 bgcolor_hide">
+      <div class="title_three_line_title1">
+        交易分链
+      </div>
+      <div class="title_three_line_tab">
+        <ul>
+          <li class="left color_hide">账户总数</li>
+          <li class="right color_hide">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">成员</li>
+          <li class="right color_hide" style="margin-right:-15%">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">块高</li>
+          <li class="right color_hide">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">分链数</li>
+          <li class="right color_hide">0</li>
+        </ul>
+        <ul>
+          <li class="left color_hide">交易数</li>
+          <li class="right color_hide">0</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="first_body">
+  <div class="first_table">
+    <p class="first_table_title">交易分链</p>
+  </div>
+  <div class="first_table_1">
+    <nz-table #basicTable
+              [nzData]="dataSet"
+              [nzPageSize]="10"
+              [nzFrontPagination]="false"
+              [nzLoading]="loading"
+              [nzTotal]="total"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="searchData()"
+              (nzPageSizeChange)="searchData(true)"
+    >
+      <thead>
+      <tr>
+        <th nzWidth="20%" class="tex_center">分链ID</th>
+        <th nzWidth="20%" class="tex_center">交易</th>
+        <th nzWidth="20%" class="tex_center">Tps</th>
+        <th nzWidth="20%" class="tex_center">块高</th>
+        <th nzWidth="20%" class="tex_center">committee</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of dataSet">
+        <td class="tex_center color_purple" (click)="gotopireId(data.chainId)">{{data.chainId}}</td>
+        <td class="tex_center color_purple" (click)="gotopireId(data.chainId)">{{data.txcount}}</td>
+        <td class="tex_center color_black">{{data.tps}}</td>
+        <td class="tex_center color_purple" (click)="blockInformation(data.chainId,data.currentheight)">{{data.currentheight}}</td>
+        <td class="tex_center color_purple" (click)="shortcut_menu_open(data.currentcomm,1)">{{data.currentcomm.length}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+<div [hidden]="isOperating" class="Pop_ups">
+  <div class="Pop_ups_title">
+    <span class="Pop_ups_title_text">committee</span>
+    <span class="Pop_ups_title_close" (click)="shortcut_menu_close()">
+      x
+    </span>
+  </div>
+  <div class="Pop_ups_body">
+    <!--<ul class="Pop_ups_body_header">-->
+    <!--<li style="width: 20%">时间</li>-->
+    <!--<li style="width: 30%">源账户</li>-->
+    <!--<li style="width: 30%">目的账户</li>-->
+    <!--<li style="width: 10%">数额</li>-->
+    <!--<li style="width: 10%">状态</li>-->
+
+    <!--</ul>-->
+    <div class="Pop_ups_body_con">
+      <ul *ngFor="let data of commttees;let index=index">
+        <li style="width:8%">{{index+1}}.</li>
+        <li style="width: 85%;overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;text-align: left">
+          {{data}}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="Pop_ups_footer">
+
+  </div>
+</div>
+<!--操作蒙层-->
+<div class="Mask" [hidden]="isOperating">
+</div>
